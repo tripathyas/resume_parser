@@ -35,9 +35,8 @@ class PdfFile(BaseFile):
         device.close()
 
         # Get full string from PDF
-        full_string = retstr.getvalue()
+        full_string = retstr
         retstr.close()
-        full_string = full_string.decode("utf-8")
 
         # Normalize a bit, removing line breaks
         full_string = full_string.replace("\r", "\n")
@@ -45,7 +44,7 @@ class PdfFile(BaseFile):
 
         # Remove awkward LaTeX bullet characters
         full_string = re.sub(r"\(cid:\d{0,2}\)", " ", full_string)
-        return full_string.encode('ascii', errors='ignore')
+        return full_string
 
 
 if __name__ == '__main__':
