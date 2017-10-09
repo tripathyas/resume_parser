@@ -2,6 +2,7 @@ import logging
 import os
 import re
 from pdffile import PdfFile
+import sys
 
 
 class ResumeParser():
@@ -12,7 +13,7 @@ class ResumeParser():
         self.file_type = self.extract_file_type()
         self.file_object = self.file_factory()
         self.text_content = self.file_object.get_content_in_text()
-        print("done")
+        print(self.text_content)
 
     def extract_file_type(self):
         return os.path.splitext(self.file_path)[1]
@@ -36,6 +37,6 @@ class ResumeParser():
 
 if __name__ == '__main__':
     logging.basicConfig(filename='resume_parser.log',
-                        level=logging.DEBUG, filemode='w')
+                        level=logging.INFO, filemode='w')
     resumeParser = ResumeParser(
         "/home/shubhi/Downloads/Ashutosh_Tripathy_Intel_6.1Yrs_Bang.pdf")

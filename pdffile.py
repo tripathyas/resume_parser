@@ -5,7 +5,6 @@ from pdfminer.converter import XMLConverter, HTMLConverter, TextConverter
 from pdfminer.layout import LAParams
 import io
 import logging
-import StringIO
 import re
 
 
@@ -38,6 +37,7 @@ class PdfFile(BaseFile):
         # Get full string from PDF
         full_string = retstr.getvalue()
         retstr.close()
+        full_string = full_string.decode("utf-8")
 
         # Normalize a bit, removing line breaks
         full_string = full_string.replace("\r", "\n")
@@ -45,7 +45,6 @@ class PdfFile(BaseFile):
 
         # Remove awkward LaTeX bullet characters
         full_string = re.sub(r"\(cid:\d{0,2}\)", " ", full_string)
-        full_string = full_string.decode("utf-8")
         return full_string.encode('ascii', errors='ignore')
 
 
